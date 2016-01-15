@@ -1,0 +1,31 @@
+{
+  "name": "isolated-core-example",
+  "description": "",
+  "version": "0.0.1",
+  "license": "MIT",
+  "author": {
+    "name": "Max Goodman",
+    "email": "c@chromakode.com"
+  },
+  "scripts": {
+    "start": "webpack-dev-server --watch-poll --content-base build/ --host 0.0.0.0",
+    "build": "webpack"
+  },
+  "main": "lib/core.js",
+  "dependencies": {
+    "isolated-core": "../",
+    "react": "^0.14.0",
+    "react-dom": "^0.14.0"
+  },
+  "devDependencies": {
+    "babel": "~6.3.26",
+    "babel-cli": "~6.3.17",
+    "babel-plugin-transform-object-rest-spread": "~6.3.13",
+    "babel-preset-es2015": "~6.3.13",
+    "babel-preset-react": "~6.3.13",
+    "babel-loader": "~6.2.1",
+    "webpack": "~1.12.0",
+    "webpack-dev-server": "~1.14.0",
+    "http-server": "~0.8.5"
+  }
+}
