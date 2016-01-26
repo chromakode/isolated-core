@@ -40,6 +40,7 @@
     "expect": "~1.13.4",
     "eslint": "~1.10.3",
     "eslint-config-airbnb": "~2.0.0",
+    "eslint-plugin-react": "~3.11.3",
     "babel-eslint": "~4.1.6"
   }
 }
