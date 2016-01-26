@@ -2,7 +2,7 @@
 
 :construction: **Under Construction** :construction:
 
-:zap: A library for seamless in-page cold updates using iframes. [Demo]().
+:zap: A library for seamless in-page cold updates using iframes. [Demo](http://chromakode.github.io/isolated-core/).
 
 
 ## Introduction
@@ -20,7 +20,7 @@ Isolated Core is complementary to existing techniques like [Hot Module Replaceme
 
 ## Example
 
-You can find a demo codebase demonstrating reloading using Isolated Core in the [example]() directory of this repo. You can also [view the demo in your browser]().
+You can find a demo codebase demonstrating reloading using Isolated Core in the [example](https://github.com/chromakode/isolated-core/tree/master/example) directory of this repo. You can also [view the demo in your browser](http://chromakode.github.io/isolated-core/).
 
 
 ## Usage
