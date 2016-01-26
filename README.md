@@ -139,10 +139,10 @@ When the promise resolves or rejects, it passes an object of the form:
 
 ```js
 {
-  id: 0,                   // A unique numeric id for the core
-  args: {...},             // The args object you specified
-  context: <window>        // A reference to the window object of the iframe
-  destroyCore: <function>  // Call to remove the core's iframe
+  id: 0,                    // A unique numeric id for the core
+  args: {...},              // The args object you specified
+  context: <window>,        // A reference to the window object of the iframe
+  destroyCore: <function>,  // Call to remove the core's iframe
 }
 ```
 
@@ -150,7 +150,7 @@ If the promise resolves, the return type will also include:
 
 ```js
 {
-  launchCore: <function>   // Call to detach the current core and attach this new one
+  launchCore: <function>,   // Call to detach the current core and attach this new one
 }
 ```
 
@@ -158,9 +158,9 @@ If the promise rejects, the return type will also include:
 
 ```js
 {
-  type: 'request'|'js',   // Either 'request' on network error, or 'js' on exception
-  src: <url>,             // If type: 'request', the URL that failed to load
-  err: <Error>,           // If type: 'js', the exception object thrown
+  type: 'request'|'js',     // Either 'request' on network error, or 'js' on exception
+  src: <url>,               // If type: 'request', the URL that failed to load
+  err: <Error>,             // If type: 'js', the exception object thrown
 }
 ```
 
