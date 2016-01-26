@@ -1,5 +1,8 @@
 # Isolated Core
 
+[![Build Status](https://img.shields.io/travis/chromakode/isolated-core/master.svg?style=flat-square)](https://travis-ci.org/chromakode/isolated-core)
+[![Coverage Status](https://img.shields.io/coveralls/chromakode/isolated-core/master.svg?style=flat-square)](https://coveralls.io/github/chromakode/isolated-core?branch=master)
+
 :construction: **Under Construction** :construction:
 
 :zap: A library for seamless in-page cold updates using iframes. [Demo](http://chromakode.github.io/isolated-core/).
