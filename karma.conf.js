@@ -43,6 +43,7 @@ module.exports = function(config) {
     coverageReporter: {
       reporters: [
         { type: 'text' },
+        { type: 'lcovonly', subdir: '.' },
       ],
     },
     port: 9876,
