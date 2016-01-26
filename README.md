@@ -47,7 +47,7 @@ coreInit({
 
 In your initialization function, take a `core` argument and call `core.ready()` with handlers to `attach` and `detach` your UI. These handlers are responsible for instantiating and decontructing your UI in the parent document when your core is loaded or replaced. Both of these handlers receive the parent document ("uidocument") as an argument. For example, here's a basic React setup:
 
-**index.js**
+**index.js:**
 
 ```js
 import React from 'react'
