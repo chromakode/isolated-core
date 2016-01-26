@@ -17,5 +17,8 @@ export default function scriptsToHTML(scripts, onError) {
     scriptEl.setAttribute('onerror', onError)
     scriptContainerEl.appendChild(scriptEl)
   })
-  return scriptContainerEl.innerHTML
+  const caseNormalized = scriptContainerEl.innerHTML
+    .replace('<SCRIPT ', '<script ')
+    .replace('</SCRIPT>', '</script>')
+  return caseNormalized
 }
