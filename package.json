@@ -14,6 +14,7 @@
   "scripts": {
     "lint": "eslint ./example ./src ./test",
     "test": "karma start karma.conf.js",
+    "test:sauce": "karma start karma-sauce.conf.js",
     "compile": "babel -d lib/ src/",
     "prepublish": "npm run compile"
   },
@@ -32,6 +33,7 @@
     "karma-mocha": "~0.2.1",
     "karma-mocha-reporter": "~1.1.5",
     "karma-phantomjs-launcher": "~0.2.3",
+    "karma-sauce-launcher": "~0.3.0",
     "karma-coverage": "~0.5.3",
     "karma-webpack": "~1.7.0",
     "karma-sourcemap-loader": "~0.3.7",
