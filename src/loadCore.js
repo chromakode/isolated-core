@@ -18,6 +18,9 @@ export default function loadCore(opts, uidocument = window._core.uidocument) {
     envEl.setAttribute('data-coreid', coreId)
     uidocument.body.appendChild(envEl)
 
+    const envDoc = envEl.contentDocument
+    envDoc.open()
+
     const envContext = envEl.contentWindow
     const coreData = envContext._core = {
       id: coreId,
@@ -50,11 +53,9 @@ export default function loadCore(opts, uidocument = window._core.uidocument) {
       },
     }
 
-    const envDoc = envEl.contentDocument
-    envDoc.open()
-    envDoc.write('<!doctype html><html><head></head><body>')
-    envDoc.write(scriptsToHTML(opts.scripts, '_core.onLoadError(this.src)'))
-    envDoc.write('</body></html>')
+    const scriptsHTML = scriptsToHTML(opts.scripts, '_core.onLoadError(this.src)')
+    const contentHTML = `<!doctype html><html><head></head><body>${scriptsHTML}</body></html>`
+    envDoc.write(contentHTML)
     envDoc.close()
   })
 }

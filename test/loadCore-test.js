@@ -34,16 +34,10 @@ describe('loadCore', () => {
       expect(envEl.parentNode).toBe(document.body)
       expect(envEl.contentDocument.doctype.name).toBe('html')
 
-      const expectedHTML = `
-        <html>
-          <head>
-          </head>
-          <body>
-            <script src="/base/test/fixtures/spyCore.js" id="test" onerror="_core.onLoadError(this.src)"></script>
-          </body>
-        </html>
-      `.replace(/\n\s*/g, '')
-      expect(envEl.contentDocument.documentElement.outerHTML).toBe(expectedHTML)
+      const scriptEl = envEl.contentDocument.getElementById('test')
+      expect(scriptEl).toExist()
+      expect(scriptEl.src).toInclude('/base/test/fixtures/spyCore.js')
+      expect(scriptEl.getAttribute('onerror')).toBe('_core.onLoadError(this.src)')
 
       coreRef.destroyCore()
       expect(envEl.parentNode).toBe(null)
