@@ -11,7 +11,7 @@ describe('coreInit', () => {
 
     afterEach(() => {
       delete window.top.coreEvent
-      delete window._lastCoreId
+      delete document._lastCoreId
     })
 
     it('loads and attaches the first core', () => {

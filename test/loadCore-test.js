@@ -21,7 +21,7 @@ describe('loadCore', () => {
 
   afterEach(() => {
     delete window.top.coreEvent
-    delete window._lastCoreId
+    delete document._lastCoreId
     expect(document.querySelector('[data-coreid]')).toBe(null, 'Expected core to be destroyed after test')
   })
 
