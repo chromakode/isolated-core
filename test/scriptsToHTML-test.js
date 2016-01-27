@@ -6,9 +6,9 @@ describe('scriptsToHTML', () => {
     const scripts = [
       'string.js',
       Object.create({ foo: 'bar' }, { src: { value: 'Test.js', enumerable: true } }),
-      { src: 'async.js', async: true },
+      { src: 'async.js', async: true, onerror: 'nope' },
     ]
-    const result = scriptsToHTML(scripts, 'test(this.src)').replace(/\r\n/g, '')
+    const result = scriptsToHTML(scripts, 'test(this.src)')
     const expectedResult = `
       <script src="string.js" onerror="test(this.src)"></script>
       <script src="Test.js" onerror="test(this.src)"></script>

@@ -1,24 +1,20 @@
 export default function scriptsToHTML(scripts, onError) {
-  const scriptContainerEl = document.createElement('div')
-  scripts.forEach(scriptAttrs => {
-    const scriptEl = document.createElement('script')
-
+  const tags = scripts.map(scriptAttrs => {
+    const attrStrings = []
     if (typeof scriptAttrs === 'string') {
-      scriptEl.src = scriptAttrs
+      attrStrings.push(`src="${scriptAttrs}"`)
     } else {
       for (const attrName in scriptAttrs) {
-        if (!scriptAttrs.hasOwnProperty(attrName)) {
+        if (attrName === 'onerror' || !scriptAttrs.hasOwnProperty(attrName)) {
           continue
         }
-        scriptEl.setAttribute(attrName, scriptAttrs[attrName])
+        attrStrings.push(`${attrName}="${scriptAttrs[attrName]}"`)
       }
     }
+    attrStrings.push(`onerror="${onError}"`)
 
-    scriptEl.setAttribute('onerror', onError)
-    scriptContainerEl.appendChild(scriptEl)
+    const attrsString = attrStrings.join(' ')
+    return `<script ${attrsString}></script>`
   })
-  const caseNormalized = scriptContainerEl.innerHTML
-    .replace('<SCRIPT ', '<script ')
-    .replace('</SCRIPT>', '</script>')
-  return caseNormalized
+  return tags.join('')
 }
