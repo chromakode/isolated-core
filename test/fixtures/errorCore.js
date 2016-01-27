@@ -1,7 +1,7 @@
-import { coreInit, currentScript } from '../../src'
+import { coreInit } from '../../src'
 
 coreInit({
-  scripts: [currentScript.src],
+  scripts: ['/base/test/fixtures/errorCore.js'],
   run: () => {
     throw new Error('oh noes!')
   },

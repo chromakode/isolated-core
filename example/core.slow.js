@@ -1,7 +1,7 @@
-import { coreInit, currentScript } from 'isolated-core'
+import { coreInit } from 'isolated-core'
 
 coreInit({
-  scripts: [currentScript.src],
+  scripts: ['/main.js'],
   run: core => {
     const start = Date.now()
     while (Date.now() < start + 2000) {}  // eslint-disable-line no-empty

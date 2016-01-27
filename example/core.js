@@ -1,6 +1,6 @@
-import { coreInit, currentScript } from 'isolated-core'
+import { coreInit } from 'isolated-core'
 
 coreInit({
-  scripts: [currentScript.src],
+  scripts: ['/main.js'],
   run: core => require('./').init(core),
 })

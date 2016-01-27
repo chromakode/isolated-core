@@ -1,14 +1,16 @@
 import 'core-js'
-import { coreInit, loadCore, currentScript } from '../../src'
+import { coreInit, loadCore } from '../../src'
+
+const URL = '/base/test/fixtures/spyCore.js'
 
 coreInit({
-  scripts: [currentScript.src],
+  scripts: [URL],
   run: core => {
     window.top.coreEvent('init', core)
 
     window.loadNextCore = function loadNextCore() {
       return loadCore({
-        scripts: [currentScript.src],
+        scripts: [URL],
       })
     }
 

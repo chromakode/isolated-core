@@ -35,12 +35,10 @@ This design makes Isolated Core compatible with a [Content Security Policy](http
 **main.js:**
 
 ```js
-import { coreInit, currentScript } from 'isolated-core'
+import { coreInit } from 'isolated-core'
 
 coreInit({
-  // currentScript is provided as a convenience for loading the current script
-  // inside a core.
-  scripts: [currentScript.src],
+  scripts: ['/main.js'],
 
   // Note: we are deferring require()ing our code until the "run" function
   // executes inside the iframe. Our init function is exported by index.js.
@@ -76,7 +74,7 @@ To load an update, call `loadCore` with a list of scripts to execute. It returns
 
 ```js
 loadCore({
-  scripts: [currentScript.src],
+  scripts: ['/main.js'],
 }).then(
   function success(coreRef) => {
     // Call launchCore to detach the current core and attach the new one.
@@ -166,7 +164,3 @@ If the promise rejects, the return type will also include:
   err: <Error>,             // If type: 'js', the exception object thrown
 }
 ```
-
-### `currentScript`
-
-A reference to the `<script>` element that is currently executing. This is provided for convenience and compatibility with browsers that don't support `document.currentScript`.
