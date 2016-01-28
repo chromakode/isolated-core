@@ -23,6 +23,8 @@ Isolated Core is complementary to existing techniques like [Hot Module Replaceme
 
 ## Browser Compatibility
 
+Isolated core works on IE9+ and all other modern browsers. IE8 support is possible but not complete -- if you need it, please file an issue!
+
 [![Sauce Test Status](https://saucelabs.com/browser-matrix/isolated-core.svg)](https://saucelabs.com/u/isolated-core)
 
 
