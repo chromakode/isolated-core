@@ -21,6 +21,11 @@ With Isolated Core, your client-side JS (the "core") is contained within an `<if
 Isolated Core is complementary to existing techniques like [Hot Module Replacement (HMR)](https://webpack.github.io/docs/hot-module-replacement-with-webpack.html) and is framework agnostic. Unlike HMR, Isolated Core reloads your entire app environment \*cold\*, from a blank slate. This makes updates predictable and easy to reason about, and facilitates updating components that previously required a full page reload. In addition, Isolated Core makes rollouts safer: since updates load and initialize in the background, failures can be caught rapidly and without disrupting the user.
 
 
+## Browser Compatibility
+
+[![Sauce Test Status](https://saucelabs.com/browser-matrix/isolated-core.svg)](https://saucelabs.com/u/isolated-core)
+
+
 ## Example
 
 You can find a demo codebase demonstrating reloading using Isolated Core in the [example](https://github.com/chromakode/isolated-core/tree/master/example) directory of this repo. You can also [view the demo in your browser](http://chromakode.github.io/isolated-core/).
