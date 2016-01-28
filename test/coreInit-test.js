@@ -1,4 +1,5 @@
 import expect, { createSpy } from 'expect'
+import { cacheBust } from './utils'
 import { coreInit } from '../src/'
 
 describe('coreInit', () => {
@@ -18,7 +19,7 @@ describe('coreInit', () => {
       const fakeRun = createSpy()
 
       return coreInit({
-        scriptURL: '/base/test/fixtures/spyCore.js',
+        scriptURL: cacheBust('/base/test/fixtures/spyCore.js'),
         run: fakeRun,
       }).then(coreRef => {
         expect(fakeRun).toNotHaveBeenCalled()
@@ -48,7 +49,7 @@ describe('coreInit', () => {
 
     it('passes core data object to run function', () => {
       coreInit({
-        scriptURL: '/base/test/fixtures/spyCore.js',
+        scriptURL: cacheBust('/base/test/fixtures/spyCore.js'),
         run: core => {
           expect(core.id).toBe(0)
           expect(core.args).toBe(undefined)
@@ -65,7 +66,7 @@ describe('coreInit', () => {
       const fakeError = new Error('oh noes!')
       try {
         coreInit({
-          scriptURL: '/base/test/fixtures/spyCore.js',
+          scriptURL: cacheBust('/base/test/fixtures/spyCore.js'),
           run: () => {
             throw fakeError
           },

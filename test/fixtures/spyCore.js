@@ -1,7 +1,8 @@
 import 'core-js'
 import { coreInit, loadCore } from '../../src'
+import { cacheBust } from '../utils'
 
-const scriptURL = '/base/test/fixtures/spyCore.js'
+const scriptURL = cacheBust('/base/test/fixtures/spyCore.js')
 
 coreInit({
   scriptURL,

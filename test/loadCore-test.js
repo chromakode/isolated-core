@@ -1,4 +1,5 @@
 import expect, { createSpy, spyOn } from 'expect'
+import { cacheBust } from './utils'
 import { coreInit, loadCore } from '../src/'
 
 function checkCoreInfo(coreInfo) {
@@ -27,7 +28,7 @@ describe('loadCore', () => {
 
   it('creates an iframe containing script with data-coreid attribute set, and removes when destroyed', () => {
     return loadCore({
-      scriptURL: '/base/test/fixtures/spyCore.js',
+      scriptURL: cacheBust('/base/test/fixtures/spyCore.js'),
     }).then(coreRef => {
       const envEl = coreRef.context.frameElement
       expect(envEl.getAttribute('data-coreid')).toBe('0')
@@ -47,7 +48,7 @@ describe('loadCore', () => {
   it('populates iframe context with _core data', () => {
     const args = { it: 'works' }
     return loadCore({
-      scriptURL: '/base/test/fixtures/spyCore.js',
+      scriptURL: cacheBust('/base/test/fixtures/spyCore.js'),
       args,
     }).then(coreRef => {
       const coreData = coreRef.context._core
@@ -63,7 +64,7 @@ describe('loadCore', () => {
 
   it('when a core becomes ready, saves handlers to coreData and resolves with a coreInfo object containing a launchCore method', () => {
     return loadCore({
-      scriptURL: '/base/test/fixtures/spyCore.js',
+      scriptURL: cacheBust('/base/test/fixtures/spyCore.js'),
     }).then(coreRef => {
       expect(coreEvent.calls[1].arguments[0]).toBe('ready')
       const handlers = coreEvent.calls[1].arguments[2]
@@ -96,7 +97,7 @@ describe('loadCore', () => {
     }
 
     return coreInit({
-      scriptURL: '/base/test/fixtures/spyCore.js',
+      scriptURL: cacheBust('/base/test/fixtures/spyCore.js'),
     }).then(firstCoreRef => {
       expect(firstCoreRef.id).toBe(0)
       const firstEnvEl = firstCoreRef.context.frameElement
@@ -130,7 +131,7 @@ describe('loadCore', () => {
 
   it('rejects if a script throws an exception with an errInfo object, and removes when destroyed', () => {
     return loadCore({
-      scriptURL: '/base/test/fixtures/errorCore.js',
+      scriptURL: cacheBust('/base/test/fixtures/errorCore.js'),
     }).then(
       () => {
         throw new Error('Expected promise to be rejected')
@@ -153,7 +154,7 @@ describe('loadCore', () => {
 
   it('rejects if a script fails to load with an errInfo object, and removes when destroyed', () => {
     return loadCore({
-      scriptURL: '/base/test/fixtures/nonexistent.js',
+      scriptURL: cacheBust('/base/test/fixtures/nonexistent.js'),
     }).then(
       () => {
         throw new Error('Expected promise to be rejected')
