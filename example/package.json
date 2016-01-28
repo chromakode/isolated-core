@@ -19,13 +19,11 @@
   },
   "devDependencies": {
     "babel": "~6.3.26",
-    "babel-cli": "~6.3.17",
     "babel-plugin-transform-object-rest-spread": "~6.3.13",
     "babel-preset-es2015": "~6.3.13",
     "babel-preset-react": "~6.3.13",
     "babel-loader": "~6.2.1",
     "webpack": "~1.12.0",
-    "webpack-dev-server": "~1.14.0",
-    "http-server": "~0.8.5"
+    "webpack-dev-server": "~1.14.0"
   }
 }
