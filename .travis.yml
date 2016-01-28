@@ -10,3 +10,4 @@ script:
 after_success:
   - npm install coveralls lcov-result-merger
   - $(npm bin)/lcov-result-merger './coverage/*/lcov.info' | $(npm bin)/coveralls
+  - ./scripts/deploy.sh
