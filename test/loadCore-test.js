@@ -85,7 +85,7 @@ describe('loadCore', () => {
     })
   })
 
-  it('launchCore method swaps with current core, sets data-core-active attribute, and destroys the previous core', () => {
+  it('launchCore method swaps with current core, sets data-core-active attribute, and destroys the previous core', done => {
     delete window._core
 
     function expectCoreEvent(index, name, coreId, thirdArgument) {
@@ -96,11 +96,15 @@ describe('loadCore', () => {
       }
     }
 
-    return coreInit({
+    let hoistedFirstEnvEl
+    let hoistedSecondEnvEl
+    let hoistedSecondCoreRef
+
+    coreInit({
       scriptURL: cacheBust('/base/test/fixtures/spyCore.js'),
     }).then(firstCoreRef => {
       expect(firstCoreRef.id).toBe(0)
-      const firstEnvEl = firstCoreRef.context.frameElement
+      const firstEnvEl = hoistedFirstEnvEl = firstCoreRef.context.frameElement
       expect(firstEnvEl.parentNode).toBe(document.body)
       expect(firstEnvEl.getAttribute('data-coreid')).toBe('0')
       expect(firstEnvEl.getAttribute('data-core-active')).toBe('')
@@ -108,25 +112,40 @@ describe('loadCore', () => {
       expectCoreEvent(1, 'ready', 0)
       expectCoreEvent(2, 'attach', 0, document)
 
-      return firstCoreRef.context.loadNextCore().then(secondCoreRef => {
+      firstCoreRef.context.loadNextCore().then(secondCoreRef => {
+        hoistedSecondCoreRef = secondCoreRef
+
         expect(secondCoreRef.id).toBe(1)
-        const secondEnvEl = secondCoreRef.context.frameElement
+        const secondEnvEl = hoistedSecondEnvEl = secondCoreRef.context.frameElement
         expect(secondEnvEl.getAttribute('data-coreid')).toBe('1')
         expect(secondEnvEl.getAttribute('data-core-active')).toBe(null)
         expectCoreEvent(3, 'init', 1)
         expectCoreEvent(4, 'ready', 1)
 
-        secondCoreRef.launchCore()
-
-        expectCoreEvent(5, 'detach', 0, document)
-        expectCoreEvent(6, 'attach', 1, document)
-        expect(firstEnvEl.getAttribute('data-core-active')).toBe(null)
-        expect(firstEnvEl.parentNode).toBe(null)
-        expect(secondEnvEl.getAttribute('data-core-active')).toBe('')
-
-        secondCoreRef.destroyCore()
+        firstCoreRef.context.launchNextCore()
       })
     })
+
+    // Since the execution of the first core will stop after launchCore is
+    // called, we use a timeout in the current context to continue testing.
+    function waitForSecondCore() {
+      if (coreEvent.calls.length < 6) {
+        setTimeout(waitForSecondCore, 0)
+        return
+      }
+
+      expectCoreEvent(5, 'detach', 0, document)
+      expectCoreEvent(6, 'attach', 1, document)
+      expect(coreEvent.calls.length).toBe(7)
+
+      expect(hoistedFirstEnvEl.getAttribute('data-core-active')).toBe(null)
+      expect(hoistedFirstEnvEl.parentNode).toBe(null)
+      expect(hoistedSecondEnvEl.getAttribute('data-core-active')).toBe('')
+
+      hoistedSecondCoreRef.destroyCore()
+      done()
+    }
+    waitForSecondCore()
   })
 
   it('rejects if a script throws an exception with an errInfo object, and removes when destroyed', () => {

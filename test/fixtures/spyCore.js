@@ -9,8 +9,16 @@ coreInit({
   run: core => {
     window.top.coreEvent('init', core)
 
+    let nextCoreRef
     window.loadNextCore = function loadNextCore() {
-      return loadCore({ scriptURL })
+      return loadCore({ scriptURL }).then(coreRef => nextCoreRef = coreRef)
+    }
+
+    window.launchNextCore = function launchNextCore() {
+      nextCoreRef.launchCore()
+      // When we call launchCore, the current iframe is removed from the DOM.
+      // Subsequent statements should not be executed.
+      window.top.coreEvent('xxx', core)
     }
 
     const handlers = {

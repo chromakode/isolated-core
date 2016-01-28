@@ -156,6 +156,8 @@ If the promise resolves, the return type will also include:
 }
 ```
 
+Calling `launchCore` will remove the current execution context from the DOM. Statements following `launchCore` will not execute.
+
 If the promise rejects, the return type will also include:
 
 ```js
