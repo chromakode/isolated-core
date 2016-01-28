@@ -37,6 +37,9 @@ module.exports = function(config) {
     },
     webpackMiddleware: {
       noInfo: true,
+      watchOptions: {
+        poll: true,
+      },
     },
     browsers: ['PhantomJS'],
     reporters: ['mocha', 'coverage'],
