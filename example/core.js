@@ -1,6 +1,6 @@
 import { coreInit } from 'isolated-core'
 
 coreInit({
-  scriptURL: '/main.js',
+  scriptURL: 'main.js',
   run: core => require('./').init(core),
 })
