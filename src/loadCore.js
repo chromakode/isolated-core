@@ -1,5 +1,4 @@
 import getNextCoreId from './getNextCoreId'
-import scriptsToHTML from './utils/scriptsToHTML'
 import { destroyCore, swapCore } from './operations'
 
 function coreInfo(context) {
@@ -53,8 +52,7 @@ export default function loadCore(opts, uidocument = window._core.uidocument) {
       },
     }
 
-    const scriptsHTML = scriptsToHTML(opts.scripts, '_core.onLoadError(this.src)')
-    const contentHTML = `<!doctype html><html><head></head><body>${scriptsHTML}</body></html>`
+    const contentHTML = `<!doctype html><html><body><script src="${opts.scriptURL}" onerror="_core.onLoadError(this.src)"></script></body></html>`
     envDoc.write(contentHTML)
     envDoc.close()
   })

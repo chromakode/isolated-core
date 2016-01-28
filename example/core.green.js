@@ -1,7 +1,7 @@
 import { coreInit } from 'isolated-core'
 
 coreInit({
-  scripts: ['/main.js'],
+  scriptURL: '/main.js',
   run: core => {
     const React = require('react')
     const DemoUI = require('./DemoUI').default

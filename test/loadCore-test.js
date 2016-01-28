@@ -25,16 +25,16 @@ describe('loadCore', () => {
     expect(document.querySelector('[data-coreid]')).toBe(null, 'Expected core to be destroyed after test')
   })
 
-  it('creates an iframe containing scripts with data-coreid attribute set, and removes when destroyed', () => {
+  it('creates an iframe containing script with data-coreid attribute set, and removes when destroyed', () => {
     return loadCore({
-      scripts: [{ src: '/base/test/fixtures/spyCore.js', id: 'test' }],
+      scriptURL: '/base/test/fixtures/spyCore.js',
     }).then(coreRef => {
       const envEl = coreRef.context.frameElement
       expect(envEl.getAttribute('data-coreid')).toBe('0')
       expect(envEl.parentNode).toBe(document.body)
       expect(envEl.contentDocument.doctype.name).toBe('html')
 
-      const scriptEl = envEl.contentDocument.getElementById('test')
+      const scriptEl = envEl.contentDocument.getElementsByTagName('script')[0]
       expect(scriptEl).toExist()
       expect(scriptEl.src).toInclude('/base/test/fixtures/spyCore.js')
       expect(scriptEl.getAttribute('onerror')).toBe('_core.onLoadError(this.src)')
@@ -47,7 +47,7 @@ describe('loadCore', () => {
   it('populates iframe context with _core data', () => {
     const args = { it: 'works' }
     return loadCore({
-      scripts: ['/base/test/fixtures/spyCore.js'],
+      scriptURL: '/base/test/fixtures/spyCore.js',
       args,
     }).then(coreRef => {
       const coreData = coreRef.context._core
@@ -63,7 +63,7 @@ describe('loadCore', () => {
 
   it('when a core becomes ready, saves handlers to coreData and resolves with a coreInfo object containing a launchCore method', () => {
     return loadCore({
-      scripts: ['/base/test/fixtures/spyCore.js'],
+      scriptURL: '/base/test/fixtures/spyCore.js',
     }).then(coreRef => {
       expect(coreEvent.calls[1].arguments[0]).toBe('ready')
       const handlers = coreEvent.calls[1].arguments[2]
@@ -84,33 +84,6 @@ describe('loadCore', () => {
     })
   })
 
-  it('executes scripts in order specified', () => {
-    const scriptOrder = []
-    coreEvent.andCall((name, param) => {
-      if (name === 'init' || name === 'script-run') {
-        scriptOrder.push(param.args.order)
-      }
-    })
-
-    const scripts = []
-    const expectedOrder = []
-    let i
-    for (i = 0; i < 100; i++) {
-      scripts.push({ src: '/base/test/fixtures/countScript.js', id: i })
-      expectedOrder.push(i)
-    }
-    scripts.push('/base/test/fixtures/spyCore.js')
-    expectedOrder.push(i)
-
-    return loadCore({
-      scripts,
-      args: { order: i },
-    }).then(coreRef => {
-      expect(scriptOrder).toEqual(expectedOrder)
-      coreRef.destroyCore()
-    })
-  })
-
   it('launchCore method swaps with current core, sets data-core-active attribute, and destroys the previous core', () => {
     delete window._core
 
@@ -123,7 +96,7 @@ describe('loadCore', () => {
     }
 
     return coreInit({
-      scripts: ['/base/test/fixtures/spyCore.js'],
+      scriptURL: '/base/test/fixtures/spyCore.js',
     }).then(firstCoreRef => {
       expect(firstCoreRef.id).toBe(0)
       const firstEnvEl = firstCoreRef.context.frameElement
@@ -157,7 +130,7 @@ describe('loadCore', () => {
 
   it('rejects if a script throws an exception with an errInfo object, and removes when destroyed', () => {
     return loadCore({
-      scripts: ['/base/test/fixtures/errorCore.js'],
+      scriptURL: '/base/test/fixtures/errorCore.js',
     }).then(
       () => {
         throw new Error('Expected promise to be rejected')
@@ -180,7 +153,7 @@ describe('loadCore', () => {
 
   it('rejects if a script fails to load with an errInfo object, and removes when destroyed', () => {
     return loadCore({
-      scripts: ['/base/test/fixtures/nonexistent.js'],
+      scriptURL: '/base/test/fixtures/nonexistent.js',
     }).then(
       () => {
         throw new Error('Expected promise to be rejected')
@@ -190,7 +163,7 @@ describe('loadCore', () => {
         checkCoreInfo(errInfo)
 
         expect(errInfo.type).toBe('request')
-        expect(errInfo.src).toBe(document.location.origin + '/base/test/fixtures/nonexistent.js')
+        expect(errInfo.src).toInclude('/base/test/fixtures/nonexistent.js')
 
         const envEl = errInfo.context.frameElement
         expect(envEl.parentNode).toBe(document.body)

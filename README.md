@@ -28,7 +28,7 @@ You can find a demo codebase demonstrating reloading using Isolated Core in the 
 
 ## Usage
 
-In the entry point of your app, call `coreInit`, passing it a list of scripts to execute and a function to run to initialize your app. When `coreInit` is first invoked from a script tag, it will create a new iframe, injecting the scripts you specify. Then, inside the iframe, your script runs again and `coreInit` calls the `run` function you specify.
+In the entry point of your app, call `coreInit`, passing it the URL to the current script and a function to run to initialize your app. When `coreInit` is first invoked from a script tag, it will create a new iframe, injecting the script you specify. Then, inside the iframe, your script runs again and `coreInit` calls the `run` function you specify.
 
 This design makes Isolated Core compatible with a [Content Security Policy](https://developer.mozilla.org/en-US/docs/Web/Security/CSP/Introducing_Content_Security_Policy) and browsers which do not support Data URIs in iframes.
 
@@ -38,7 +38,8 @@ This design makes Isolated Core compatible with a [Content Security Policy](http
 import { coreInit } from 'isolated-core'
 
 coreInit({
-  scripts: ['/main.js'],
+  // In non-IE, you can use document.currentScript.src here.
+  scriptURL: '/main.js',
 
   // Note: we are deferring require()ing our code until the "run" function
   // executes inside the iframe. Our init function is exported by index.js.
@@ -70,11 +71,11 @@ export function init(core) {
 
 When `coreInit` creates the first iframe, it automatically attaches it, calling your attach handler.
 
-To load an update, call `loadCore` with a list of scripts to execute. It returns a promise which resolves when the new core is loaded and ready to attach. It rejects if a script request fails to load (script tag `onerror`) or a JS exception is thrown during initialization. Under the hood, `loadCore` is creating a new iframe, injecting the scripts specified. Inside the new iframe, `coreInit` runs like before, and when it calls `core.ready()`, the promise resolves. For example:
+To load an update, call `loadCore` with a script URL to execute. It returns a promise which resolves when the new core is loaded and ready to attach. It rejects if a script request fails to load (script tag `onerror`) or a JS exception is thrown during initialization. Under the hood, `loadCore` is creating a new iframe, injecting the script specified. Inside the new iframe, `coreInit` runs like before, and when it calls `core.ready()`, the promise resolves. For example:
 
 ```js
 loadCore({
-  scripts: ['/main.js'],
+  scriptURL: '/main.js',
 }).then(
   function success(coreRef) => {
     // Call launchCore to detach the current core and attach the new one.
@@ -102,7 +103,7 @@ iframe[data-coreid] { display: none }
 
 ## API
 
-### `coreInit({ scripts, run, args })`
+### `coreInit({ scriptURL, run, args })`
 
 Initialize the core, creating the first iframe if necessary.
 
@@ -132,9 +133,9 @@ core.ready({
 })
 ```
 
-### `loadCore({ scripts, args })`
+### `loadCore({ scriptURL, args })`
 
-Load a new core with specified `args` by creating an iframe and injecting the specified `scripts` into it. Returns a promise which resolves when the core is ready to attach, or rejects in case of request or JS error.
+Load a new core with specified `args` by creating an iframe and injecting a script with the specified `scriptURL` into it. Returns a promise which resolves when the core is ready to attach, or rejects in case of request or JS error.
 
 When the promise resolves or rejects, it passes an object of the form:
 

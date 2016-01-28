@@ -18,7 +18,7 @@ describe('coreInit', () => {
       const fakeRun = createSpy()
 
       return coreInit({
-        scripts: ['/base/test/fixtures/spyCore.js'],
+        scriptURL: '/base/test/fixtures/spyCore.js',
         run: fakeRun,
       }).then(coreRef => {
         expect(fakeRun).toNotHaveBeenCalled()
@@ -48,7 +48,7 @@ describe('coreInit', () => {
 
     it('passes core data object to run function', () => {
       coreInit({
-        scripts: ['/base/test/fixtures/spyCore.js'],
+        scriptURL: '/base/test/fixtures/spyCore.js',
         run: core => {
           expect(core.id).toBe(0)
           expect(core.args).toBe(undefined)
@@ -65,7 +65,7 @@ describe('coreInit', () => {
       const fakeError = new Error('oh noes!')
       try {
         coreInit({
-          scripts: ['/base/test/fixtures/spyCore.js'],
+          scriptURL: '/base/test/fixtures/spyCore.js',
           run: () => {
             throw fakeError
           },

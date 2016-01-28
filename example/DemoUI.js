@@ -105,7 +105,7 @@ export default class DemoUI extends Component {
     })
 
     loadCore({
-      scripts: [this.state.selectedCore],
+      scriptURL: this.state.selectedCore,
     }).then(
       coreRef => {
         this.setState({
