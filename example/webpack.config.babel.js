@@ -20,6 +20,10 @@ export default {
         exclude: /node_modules/,
         loader: 'babel',
       },
+      {
+        test: /\.less$/,
+        loaders: ['css', 'less'],
+      },
     ],
   },
 }

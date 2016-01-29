@@ -1,70 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { loadCore } from 'isolated-core'
 
-const CSS = { __html: `
-body {
-  font-family: sans-serif;
-  margin: 25px;
-  max-width: 500px;
-}
-
-.info {
-  margin: 1em 0;
-}
-
-h2 {
-  margin: .25em 0;
-}
-
-p.error {
-  color: red;
-  font-weight: bold;
-  margin-bottom: 0;
-}
-
-.action {
-  min-height: 2em;
-  padding: 1em;
-  background: #eee;
-}
-
-.action, .action form {
-  display: flex;
-  align-items: center;
-}
-
-.action > * {
-  flex: 1;
-}
-
-.action label {
-  margin-right: .5em;
-}
-
-.action select {
-  flex: 1;
-}
-
-button, select {
-  font-size: 1em;
-  padding: .25em .5em;
-  margin-right: .15em;
-  align-self: stretch;
-}
-
-.ready {
-  color: green;
-  font-weight: bold;
-  width: 100%;
-}
-
-.ribbon {
-  position: absolute;
-  top: 0;
-  right: 0;
-  border: 0;
-}
-` }
+const CSS = { __html: require('./style.less') }
 
 export default class DemoUI extends Component {
   constructor(props) {
