@@ -108,6 +108,17 @@ iframe[data-coreid] { display: none }
 ```
 
 
+## Caveats
+
+While in general the Isolated Core pattern provides a lot of benefits, there are a few trade-offs worth mentioning:
+
+ * Cores typically share the same browser thread for a page, so if an update initializing in the background ties up the thread, it can cause framerate drops or pauses in the UI.
+
+ * By its nature, cold loading requires more initialization time and memory than hot replacing modules. When a core is ready but not attached yet, it adds significant memory footprint to the page.
+
+ * It's necessary to set aggressive HTTP caching headers for your core script because it will be loaded in both the initial page and then immediately again inside the first core iframe. For best results, use a CDN and include the hash of your bundles in the filename.
+
+
 ## API
 
 ### `coreInit({ scriptURL, run, args })`
