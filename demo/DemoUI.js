@@ -189,7 +189,7 @@ export default class DemoUI extends Component {
           <hr />
 
           <div className="badges">
-            <p><a href="https://travis-ci.org/chromakode/isolated-core"><img src="https://img.shields.io/travis/chromakode/isolated-core/master.svg?style=flat-square" /></a> <a href="https://coveralls.io/github/chromakode/isolated-core?branch=master"><img src="https://img.shields.io/coveralls/chromakode/isolated-core/master.svg?style=flat-square" /></a></p>
+            <p><a href="https://travis-ci.org/chromakode/isolated-core"><img src="https://img.shields.io/travis/chromakode/isolated-core/master.svg?style=flat-square" alt="Travis Status" /></a> <a href="https://coveralls.io/github/chromakode/isolated-core?branch=master"><img src="https://img.shields.io/coveralls/chromakode/isolated-core/master.svg?style=flat-square" alt="Coveralls Status" /></a></p>
             <a href="https://saucelabs.com/u/isolated-core"><img src="https://saucelabs.com/browser-matrix/isolated-core.svg" alt="Browser compatibility matrix" /></a>
           </div>
         </div>
