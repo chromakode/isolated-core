@@ -84,7 +84,7 @@ export default class DemoUI extends Component {
               <aside>Because it's running in a separate window context, the new version starts from a blank slate and initializes in the background without affecting our running app. Open your JS console for details.</aside>
             </li>
             <li className={classNames({ 'current': !onFirstStep || isDone, 'done': isDone })}>
-              <button onClick={() => this.launchCore('firstCore')} disabled={isDone}>{isDone ? `Done! Hello from core #${this.props.core.id}.` : 'Perform an update by swapping cores. Don\'t blink!'}</button>
+              <button onClick={() => this.launchCore('firstCore')} disabled={onFirstStep || isDone}>{isDone ? `Done! Hello from core #${this.props.core.id}.` : 'Perform an update by swapping cores. Don\'t blink!'}</button>
               <p>We just swapped out our entire running app from a cold start with no jank!<br /> To swap cores, we detach the current core from the DOM, tell the new one to attach, and remove the old iframe.</p>
               <aside>Since we've already initialized the new version right up to its first render() call, the actual swap is crazy fast. Isolated Core takes full advantage of frameworks like React that attach to existing nodes non-destructively. Even though we just completely swapped out our JS codebase, we attach to the existing DOM.</aside>
             </li>
