@@ -3,6 +3,11 @@ import ReactDOM from 'react-dom'
 import DemoUI from './DemoUI'
 
 export function init(core) {
+  if (process.env.NODE_ENV !== 'production') {
+    require('webpack/hot/dev-server')
+    require('webpack-dev-server/client?http://0.0.0.0:8080')
+  }
+
   console.info(`core #${core.id} loaded`)  // eslint-disable-line no-console
 
   core.ready({

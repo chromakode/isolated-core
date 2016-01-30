@@ -1,0 +1,276 @@
+@font-face {
+  font-family: 'Lato';
+  src: url('./static/Lato-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Lato';
+  src: url('./static/Lato-Bold.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Lato';
+  src: url('./static/Lato-Black.woff') format('woff');
+  font-weight: 900;
+  font-style: normal;
+}
+
+@green: hsla(120, 35%, 64%, 1);
+
+body {
+  font-family: Lato;
+  margin: .5rem;
+  box-sizing: border-box;
+}
+
+.inner, .content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.title {
+  background: @green;
+  padding: 7.5vw 0;
+
+  a {
+    color: black;
+    text-decoration: none;
+  }
+
+  h1 {
+    font-size: 3rem;
+    font-weight: 900;
+    text-align: center;
+
+    .box {
+      padding: .25em .5em;
+      border: .18em solid black;
+      background: white;
+      white-space: nowrap;
+      animation-name: box;
+      animation-iteration-count: 1;
+      animation-timing-function: ease;
+      animation-duration: 1s;
+      @keyframes box {
+        0% {
+          opacity: 0;
+        }
+        25% {
+          padding: .75em 2em;
+          border-color: white;
+          opacity: 0;
+        }
+        100% {
+          padding: .25em .5em;
+          border-color: black;
+          opacity: 1;
+        }
+      }
+    }
+  }
+}
+
+.description {
+  padding: 1rem 2rem;
+  background: mix(@green, black, 35%);
+
+  h2 {
+    font-size: 1.5rem;
+    color: mix(@green, white, 25%);
+  }
+}
+
+.content {
+  padding: 3rem 2rem;
+  font-size: 1.25rem;
+
+  h3 {
+    font-size: 1.75rem;
+  }
+
+  .steps {
+    li {
+      margin-bottom: 2.5rem;
+      opacity: .25;
+
+      &.current {
+        opacity: 1;
+      }
+
+      &.done button {
+        color: white;
+        font-weight: bold;
+        background: darken(@green, 32%);
+        border-bottom-color: darken(@green, 40%);
+      }
+    }
+
+    aside {
+      font-size: .8em;
+      opacity: .65;
+    }
+  }
+
+  hr {
+    border: none;
+    border-bottom: 1px solid #bbb;
+    margin: 3rem 0;
+  }
+
+  .diagram-step {
+    display: flex;
+    align-items: center;
+    margin: 2rem 0;
+
+    p, .diagram {
+      flex: 1;
+    }
+
+    p {
+      margin: 0;
+    }
+
+    .diagram {
+      margin-left: 2rem;
+    }
+  }
+
+  .box {
+    display: flex;
+    flex-direction: column;
+
+    .label {
+      align-self: flex-start;
+      font-size: 1rem;
+      padding: 2px 4px;
+      margin-bottom: -2px;
+      background: black;
+      color: white;
+      z-index: 1;
+    }
+
+    .inside {
+      display: flex;
+      flex-direction: column;
+      border: 2px solid black;
+      padding: .5rem;
+      background: #eee;
+
+      & > * {
+        margin: .25rem 0;
+
+        &:first-child {
+          margin-top: 0;
+        }
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+    }
+
+    .minor {
+      opacity: .5;
+    }
+
+    &.core0 {
+      @color: spin(darken(@green, 15%), 100);
+
+      .label {
+        background: @color;
+      }
+
+      .inside {
+        border-color: @color;
+      }
+    }
+
+    &.core1 {
+      @color: spin(darken(@green, 15%), 265);
+
+      .label {
+        background: @color;
+      }
+
+      .inside {
+        border-color: @color;
+      }
+    }
+  }
+
+  .badges {
+    text-align: center;
+  }
+}
+
+.core-status {
+  margin: 0 .5em;
+  transition:
+    opacity .25s ease,
+    color .25s ease;
+
+  &.loading {
+    color: black;
+    opacity: .5;
+  }
+
+  &.ready {
+    color: darken(@green, 20%);
+    font-weight: bold;
+  }
+
+  &.error {
+    color: darken(spin(@green, 240), 20%);
+    font-weight: bold;
+  }
+
+  &.none {
+    opacity: 0;
+  }
+}
+
+button {
+  padding: .5rem 1rem;
+  font-size: inherit;
+  vertical-align: middle;
+  background: #e5e5e5;
+  border: none;
+  border-bottom: 3px solid #ccc;
+  border-radius: 3px;
+
+  &:focus {
+    outline: none;
+  }
+
+  &:not(:disabled):active {
+    margin-top: 3px;
+    border-bottom-width: 0;
+  }
+}
+
+footer {
+  margin-bottom: 1.5rem;
+  text-align: center;
+  opacity: .5;
+
+  .logo {
+    vertical-align: middle;
+    margin-right: .5rem;
+    width: 1.25rem;
+  }
+
+  a {
+    color: black;
+  }
+}
+
+.ribbon {
+  position: fixed;
+  top: 0;
+  right: 0;
+  border: 0;
+}

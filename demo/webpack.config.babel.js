@@ -1,10 +1,10 @@
+import webpack from 'webpack'
 import path from 'path'
 
 export default {
   entry: {
     main: './core.js',
     green: './core.green.js',
-    slow: './core.slow.js',
     error: './core.error.js',
   },
 
@@ -22,8 +22,18 @@ export default {
       },
       {
         test: /\.less$/,
-        loaders: ['css', 'less'],
+        loaders: ['css', 'autoprefixer', 'less'],
+      },
+      {
+        test: /\.woff$|\.png$/,
+        loader: 'url',
       },
     ],
   },
+
+  plugins: [
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+    }),
+  ],
 }

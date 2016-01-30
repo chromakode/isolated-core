@@ -12,7 +12,7 @@
     "email": "c@chromakode.com"
   },
   "scripts": {
-    "lint": "eslint ./example ./src ./test",
+    "lint": "eslint ./demo ./src ./test",
     "test": "karma start karma.conf.js",
     "test:sauce": "karma start karma-sauce.conf.js",
     "compile": "babel -d lib/ src/",

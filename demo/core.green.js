@@ -1,5 +1,7 @@
 import { coreInit } from 'isolated-core'
 
+const CSS2 = { __html: require('./style2.less') }
+
 coreInit({
   scriptURL: 'main.js',
   run: core => {
@@ -12,7 +14,8 @@ coreInit({
       return (
         <div>
           {origRender.apply(this)}
-          <style>{'body { background: lightgreen }'}</style>
+          <style dangerouslySetInnerHTML={CSS2} />
+          <div id="frame" />
         </div>
       )
     }

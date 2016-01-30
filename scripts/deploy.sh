@@ -18,9 +18,9 @@ fi
 
 REV=$(git rev-parse --short HEAD)
 
-cd example
+cd demo
 npm install
-npm run build
+NODE_ENV=production npm run build
 cd build
 
 git init

@@ -5,7 +5,9 @@
 
 :construction: **Under Construction** :construction:
 
-:zap: A library for seamless in-page cold updates using iframes. [Demo](http://chromakode.github.io/isolated-core/).
+A library for seamless in-page cold updates using iframes.
+
+[:zap: **DEMO**](http://chromakode.github.io/isolated-core/)
 
 
 ## Introduction
@@ -30,7 +32,7 @@ Isolated core works on IE9+ and all other modern browsers. IE8 support is possib
 
 ## Example
 
-You can find a demo codebase demonstrating reloading using Isolated Core in the [example](https://github.com/chromakode/isolated-core/tree/master/example) directory of this repo. You can also [view the demo in your browser](http://chromakode.github.io/isolated-core/).
+You can find a demo codebase demonstrating reloading using Isolated Core in the [demo](https://github.com/chromakode/isolated-core/tree/master/demo) directory of this repo. You can also [view the demo in your browser](http://chromakode.github.io/isolated-core/).
 
 
 ## Usage
