@@ -183,13 +183,13 @@ export default class DemoUI extends Component {
           <p>With Isolated Core, updates are the same case as initialization. Both initial page loads and updates run the same code branches in an empty iframe. The only thing that differs during an update is the extra detach step of the old core. A crash running an update should correspond to a crash on app startup, making it easier to spot issues in development.</p>
 
           <h3>Getting Started</h3>
-          <p><a href="https://github.com/chromakode/isolated-core">Isolated Core</a> is available on GitHub under the <a href="https://github.com/chromakode/isolated-core/blob/master/LICENSE">MIT license.</a></p>
+          <p><a href="https://github.com/chromakode/isolated-core">Isolated Core</a> is available on GitHub under the <a href="https://github.com/chromakode/isolated-core/blob/master/LICENSE">MIT license.</a> You can also npm install <a href="https://www.npmjs.com/package/isolated-core">isolated-core</a>.</p>
           <p>See the <a href="https://github.com/chromakode/isolated-core#usage">usage section of the README</a> for a guide on how to integrate it into your app.</p>
           <p>Isolated Core is compatible with IE9+ and all modern browsers.</p>
           <hr />
 
           <div className="badges">
-            <p><a href="https://travis-ci.org/chromakode/isolated-core"><img src="https://img.shields.io/travis/chromakode/isolated-core/master.svg?style=flat-square" alt="Travis Status" /></a> <a href="https://coveralls.io/github/chromakode/isolated-core?branch=master"><img src="https://img.shields.io/coveralls/chromakode/isolated-core/master.svg?style=flat-square" alt="Coveralls Status" /></a></p>
+            <p><a href="https://travis-ci.org/chromakode/isolated-core"><img src="https://img.shields.io/travis/chromakode/isolated-core/master.svg?style=flat-square" alt="Travis status" /></a> <a href="https://coveralls.io/github/chromakode/isolated-core?branch=master"><img src="https://img.shields.io/coveralls/chromakode/isolated-core/master.svg?style=flat-square" alt="Coveralls status" /></a> <a href="https://www.npmjs.com/package/isolated-core"><img src="https://img.shields.io/npm/v/isolated-core.svg?style=flat-square" alt="NPM listing" /></a> <a href="https://github.com/chromakode/isolated-core/blob/master/LICENSE"><img src="https://img.shields.io/npm/l/isolated-core.svg?style=flat-square" alt="MIT license" /></a></p>
             <a href="https://saucelabs.com/u/isolated-core"><img src="https://saucelabs.com/browser-matrix/isolated-core.svg" className="sauce-matrix" alt="Browser compatibility matrix" /></a>
           </div>
         </div>
