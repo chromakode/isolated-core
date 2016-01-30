@@ -2,8 +2,8 @@
 
 [![Build Status](https://img.shields.io/travis/chromakode/isolated-core/master.svg?style=flat-square)](https://travis-ci.org/chromakode/isolated-core)
 [![Coverage Status](https://img.shields.io/coveralls/chromakode/isolated-core/master.svg?style=flat-square)](https://coveralls.io/github/chromakode/isolated-core?branch=master)
-
-:construction: **Under Construction** :construction:
+[![npm](https://img.shields.io/npm/v/isolated-core.svg?style=flat-square)](https://www.npmjs.com/package/isolated-core)
+[![npm](https://img.shields.io/npm/l/isolated-core.svg?style=flat-square)](https://github.com/chromakode/isolated-core/blob/master/LICENSE)
 
 A library for seamless in-page cold updates using iframes.
 
