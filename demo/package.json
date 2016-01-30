@@ -8,7 +8,7 @@
     "email": "c@chromakode.com"
   },
   "scripts": {
-    "start": "webpack-dev-server --watch-poll --content-base build/ --host 0.0.0.0",
+    "start": "webpack-dev-server --hot --watch-poll --content-base build/ --host 0.0.0.0",
     "build": "webpack -p --progress"
   },
   "main": "lib/core.js",
