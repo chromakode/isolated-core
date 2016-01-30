@@ -1,0 +1,10 @@
+demo/
+scripts/
+src/
+test/
+coverage/
+.babelrc
+.eslintrc
+.eslintignore
+.travis.yml
+karma*.conf.js
