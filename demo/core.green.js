@@ -20,6 +20,8 @@ coreInit({
       )
     }
 
+    DemoUI.prototype.isGreen = true
+
     require('./').init(core)
   },
 })

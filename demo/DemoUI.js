@@ -79,7 +79,7 @@ export default class DemoUI extends Component {
           <h3>Here, let's try reloading the page: <CoreStatus {...this.state.firstCore} /> {firstCoreReady && <span className="scroll-notice">(scroll down)</span>}</h3>
           <ol className="steps">
             <li className={classNames({ 'current': onFirstStep || isDone })}>
-              <button onClick={() => this.loadCore('firstCore', 'green.js', { reloaded: true })} disabled={this.state.firstCore.loading || firstCoreReady}>{isDone ? 'Want to see that again?' : 'Load and init a new update inside an <iframe>.'}</button>
+              <button onClick={() => this.loadCore('firstCore', this.isGreen ? 'main.js' : 'green.js', { reloaded: true })} disabled={this.state.firstCore.loading || firstCoreReady}>{isDone ? 'Want to see that again?' : 'Load and init a new update inside an <iframe>.'}</button>
               <p>In Isolated Core, your JavaScript app code (the "core") executes within an iframe.<br /> To load an update, we create a new iframe and initialize it beside the current one.</p>
               <aside>Because it's running in a separate window context, the new version starts from a blank slate and initializes in the background without affecting our running app. Open your JS console for details.</aside>
             </li>
