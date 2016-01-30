@@ -80,13 +80,13 @@ export default class DemoUI extends Component {
           <ol className="steps">
             <li className={classNames({ 'current': onFirstStep || isDone })}>
               <button onClick={() => this.loadCore('firstCore', this.isGreen ? 'main.js' : 'green.js', { reloaded: true })} disabled={this.state.firstCore.loading || firstCoreReady}>{isDone ? 'Want to see that again?' : 'Load and init a new update inside an <iframe>.'}</button>
-              <p>In Isolated Core, your JavaScript app code (the "core") executes within an iframe.<br /> To load an update, we create a new iframe and initialize it beside the current one.</p>
+              <p>In Isolated Core, your client-side JS (the "core") executes within an iframe.<br /> To load an update, we create a new iframe and initialize it beside the current one.</p>
               <aside>Because it's running in a separate window context, the new version starts from a blank slate and initializes in the background without affecting our running app. Open your JS console for details.</aside>
             </li>
             <li className={classNames({ 'current': !onFirstStep || isDone, 'done': isDone })}>
               <button onClick={() => this.launchCore('firstCore')} disabled={onFirstStep || isDone}>{isDone ? `Done! Hello from core #${this.props.core.id}.` : 'Perform an update by swapping cores. Don\'t blink!'}</button>
               <p>We just swapped out our entire running app from a cold start with no jank!<br /> To swap cores, we detach the current core from the DOM, tell the new one to attach, and remove the old iframe.</p>
-              <aside>Since we've already initialized the new version right up to its first render() call, the actual swap is crazy fast. Isolated Core takes full advantage of frameworks like React that attach to existing nodes non-destructively. Even though we just completely swapped out our JS codebase, we attach to the existing DOM.</aside>
+              <aside>Since we've already initialized the new version right up to its first render() call, the actual swap is crazy fast. Isolated Core takes full advantage of frameworks like React that attach to existing nodes non-destructively. Even though we just completely swapped out our JS scope, we reuse the existing DOM.</aside>
             </li>
           </ol>
           <hr />
@@ -131,7 +131,7 @@ export default class DemoUI extends Component {
             </div>
           </div>
           <div className="diagram-step">
-            <p>To load an update, the second core iframe is created and a script tag is injected. It loads and initializes in the background, but it doesn't attach() right away.</p>
+            <p>To load an update, a second core iframe is created and a script tag is injected. It loads and initializes in the background, but doesn't attach() right away.</p>
             <div className="diagram">
               <div className="box page">
                 <code className="label">{'index.html'}</code>
@@ -150,7 +150,7 @@ export default class DemoUI extends Component {
             </div>
           </div>
           <div className="diagram-step">
-            <p>When the second core is ready, it signals the current core and it offers the update to the user. Finally, we swap out the cores by calling detach() on core #0, calling attach() on core #1, and removing iframe #0 from the DOM.</p>
+            <p>When the second core is ready, it signals the current core which offers the update to the user. Finally, we swap out the cores by calling detach() on core #0, calling attach() on core #1, and removing iframe #0 from the DOM.</p>
             <div className="diagram">
               <div className="box page">
                 <code className="label">{'index.html'}</code>
@@ -166,14 +166,14 @@ export default class DemoUI extends Component {
           </div>
           <hr />
 
-          <h3>Isolated Core makes your updates resilient to failure.</h3>
-          <p>Both network and JS errors all the way up to the initial attach() can be caught and handled before users even know there was an update.</p>
+          <h3>Isolated Core makes updates resilient to failure.</h3>
+          <p>Network and JS errors preceding the initial attach() can be caught and handled before users even know there was an update.</p>
           <p>Let's try loading an update that throws an exception:</p>
           <button onClick={() => this.loadCore('errorCore', 'error.js')}>Load crash.js</button> <CoreStatus {...this.state.errorCore} />
           <p>Alternatively, a nonexistent update:</p>
           <button onClick={() => this.loadCore('nonexistentCore', '404.js')}>Load 404.js</button> <CoreStatus {...this.state.nonexistentCore} />
-          <p>This eliminates a large class of gotchas that cause updates to fail. Further, this can catch the tricky sort of bugs that only show up in production due to specific browser/platform idiosyncracies. You can get additional mileage from this technique by treating core setup as a "health check" &mdash; the more you cover in initialization, the greater confidence you have that an update will succeed.</p>
-          <p>When combined with an exception tracking tool like <a href="https://getsentry.com">Sentry</a>, it's easy to get immediate feedback when releases break (transparently to the affected users!) You can even smoke-test releases live on real world machines by pushing unit tests to a sampling of clients before rollouts.</p>
+          <p>This eliminates a large class of gotchas that cause updates to fail. Further, this covers the tricky sort of bugs that only show up in production due to specific browser/platform idiosyncracies. You can get additional mileage from this technique by treating core setup as a "health check" &mdash; the more you cover in initialization, the greater confidence you have that an update will succeed.</p>
+          <p>Combined with an exception tracking tool like <a href="https://getsentry.com">Sentry</a>, it's easy to get immediate feedback when releases break (transparently to the affected users!) You can even smoke-test releases live on real world machines by pushing unit tests to a sampling of clients before rollouts.</p>
 
           <h3>Cold starts are predictable and easy to reason about.</h3>
           <p>It's tricky to ensure that an update will work consistently regardless of what state the app is in. When replacing individual components, special care needs to be taken to transfer and clean up old state. This makes it challenging to predict problems that may occur when an app has been running for a long time.</p>
