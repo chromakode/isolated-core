@@ -185,3 +185,7 @@ If the promise rejects, the return type will also include:
   err: <Error>,             // If type: 'js', the exception object thrown
 }
 ```
+
+## License
+
+[MIT](https://github.com/chromakode/isolated-core/blob/master/LICENSE)
