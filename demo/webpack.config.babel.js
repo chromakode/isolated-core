@@ -3,9 +3,9 @@ import path from 'path'
 
 export default {
   entry: {
-    main: './core.js',
-    green: './core.green.js',
-    error: './core.error.js',
+    main: './src/core.js',
+    green: './src/core.green.js',
+    error: './src/core.error.js',
   },
 
   output: {
