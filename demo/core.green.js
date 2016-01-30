@@ -15,7 +15,6 @@ coreInit({
         <div>
           {origRender.apply(this)}
           <style dangerouslySetInnerHTML={CSS2} />
-          <div id="frame" />
         </div>
       )
     }
