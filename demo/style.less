@@ -79,12 +79,13 @@ body {
 }
 
 .description {
-  padding: 1rem 2rem;
+  padding: 2.25rem 2rem;
   background: mix(@green, black, 35%);
 
   h2 {
     font-size: 1.5rem;
     color: mix(@green, white, 25%);
+    margin: 0;
   }
 }
 
@@ -94,6 +95,10 @@ body {
 
   h3 {
     font-size: 1.75rem;
+  }
+
+  .scroll-notice {
+    display: none;
   }
 
   .steps {
@@ -210,6 +215,10 @@ body {
   .badges {
     text-align: center;
   }
+
+  .sauce-matrix {
+    max-width: 100%;
+  }
 }
 
 .core-status {
@@ -241,6 +250,7 @@ body {
 button {
   padding: .5rem 1rem;
   font-size: inherit;
+  text-align: left;
   vertical-align: middle;
   background: #e5e5e5;
   border: none;
@@ -279,4 +289,64 @@ footer {
   right: 0;
   border: 0;
   z-index: 100;
+}
+
+@media (max-width: 420px) {
+  html {
+    font-size: 13px;
+  }
+
+  body {
+    margin: .25rem;
+  }
+
+  .description, .content {
+    padding: 1.25rem;
+  }
+
+  .title h1 {
+    font-size: 2.5rem;
+  }
+
+  .description h2 {
+    font-size: 1.35rem;
+  }
+
+  .content {
+    h3 {
+      font-size: 1.45rem;
+    }
+
+    .scroll-notice {
+      display: inline;
+      opacity: .5;
+    }
+
+    ol {
+      padding-left: 2rem;
+    }
+
+    .diagram-step {
+      flex-direction: column;
+      align-items: stretch;
+
+      .diagram {
+        margin-left: 0;
+        margin-top: 1rem;
+      }
+    }
+  }
+
+  .core-status {
+    display: inline-block;
+    margin: .5rem 0;
+
+    &.none {
+      display: none;
+    }
+  }
+
+  .ribbon {
+    display: none;
+  }
 }

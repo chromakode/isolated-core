@@ -76,7 +76,7 @@ export default class DemoUI extends Component {
           </div>
         </div>
         <div className="content">
-          <h3>Here, let's try reloading the page: <CoreStatus {...this.state.firstCore} /></h3>
+          <h3>Here, let's try reloading the page: <CoreStatus {...this.state.firstCore} /> {firstCoreReady && <span className="scroll-notice">(scroll down)</span>}</h3>
           <ol className="steps">
             <li className={classNames({ 'current': onFirstStep || isDone })}>
               <button onClick={() => this.loadCore('firstCore', 'green.js', { reloaded: true })} disabled={this.state.firstCore.loading || firstCoreReady}>{isDone ? 'Want to see that again?' : 'Load and init a new update inside an <iframe>.'}</button>
@@ -190,7 +190,7 @@ export default class DemoUI extends Component {
 
           <div className="badges">
             <p><a href="https://travis-ci.org/chromakode/isolated-core"><img src="https://img.shields.io/travis/chromakode/isolated-core/master.svg?style=flat-square" alt="Travis Status" /></a> <a href="https://coveralls.io/github/chromakode/isolated-core?branch=master"><img src="https://img.shields.io/coveralls/chromakode/isolated-core/master.svg?style=flat-square" alt="Coveralls Status" /></a></p>
-            <a href="https://saucelabs.com/u/isolated-core"><img src="https://saucelabs.com/browser-matrix/isolated-core.svg" alt="Browser compatibility matrix" /></a>
+            <a href="https://saucelabs.com/u/isolated-core"><img src="https://saucelabs.com/browser-matrix/isolated-core.svg" className="sauce-matrix" alt="Browser compatibility matrix" /></a>
           </div>
         </div>
         <footer>
