@@ -3,7 +3,7 @@ import { coreInit } from 'isolated-core'
 const CSS2 = { __html: require('./style2.less') }
 
 coreInit({
-  scriptURL: 'main.js',
+  scriptURL: 'green.js',
   run: core => {
     const React = require('react')
     const DemoUI = require('./DemoUI').default
