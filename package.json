@@ -1,7 +1,7 @@
 {
   "name": "isolated-core",
   "description": "Seamless client side updates using iframes.",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "keywords": [
     "update",
     "iframe"
@@ -23,6 +23,7 @@
   "devDependencies": {
     "core-js": "~2.0.3",
     "babel": "~6.3.26",
+    "babel-core": "~6.4.5",
     "babel-register": "~6.3.13",
     "babel-cli": "~6.3.17",
     "babel-plugin-transform-object-rest-spread": "~6.3.13",
