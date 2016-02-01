@@ -85,8 +85,8 @@ export default class DemoUI extends Component {
             </li>
             <li className={classNames({ 'current': !onFirstStep || isDone, 'done': isDone })}>
               <button onClick={() => this.launchCore('firstCore')} disabled={onFirstStep || isDone}>{isDone ? `Done! Hello from core #${this.props.core.id}.` : 'Perform an update by swapping cores. Don\'t blink!'}</button>
-              <p>We just swapped out our entire running app from a cold start with no jank!<br /> To swap cores, we detach the current core from the DOM, tell the new one to attach, and remove the old iframe.</p>
-              <aside>Since we've already initialized the new version right up to its first render() call, the actual swap is crazy fast. Isolated Core takes full advantage of frameworks like React that attach to existing nodes non-destructively. Even though we just completely swapped out our JS scope, we reuse the existing DOM.</aside>
+              <p>We just swapped out our entire running app from a cold start with no jank!<br /> To swap cores, we detach the current core from the DOM, tell the new one to attach, and remove the detached iframe.</p>
+              <aside>Since we've already initialized the new version up to its first render() call, the actual swap is crazy fast. Isolated Core takes full advantage of frameworks like React that attach to existing nodes non-destructively. Even though we just completely swapped out our JS scope, we reuse the existing DOM.</aside>
             </li>
           </ol>
           <hr />
@@ -182,7 +182,7 @@ export default class DemoUI extends Component {
 
           <p>With Isolated Core, updates are the same case as initialization. Both initial page loads and updates run the same code branches in an empty iframe. The only thing that differs during an update is the extra detach step of the old core. A crash running an update should correspond to a crash on app startup, making it easier to spot issues in development.</p>
 
-          <h3>Getting Started</h3>
+          <h3>Getting started:</h3>
           <p><a href="https://github.com/chromakode/isolated-core">Isolated Core</a> is available on GitHub under the <a href="https://github.com/chromakode/isolated-core/blob/master/LICENSE">MIT license.</a> You can also npm install <a href="https://www.npmjs.com/package/isolated-core">isolated-core</a>.</p>
           <p>See the <a href="https://github.com/chromakode/isolated-core#usage">usage section of the README</a> for a guide on how to integrate it into your app.</p>
           <p>Isolated Core is compatible with IE9+ and all modern browsers.</p>

@@ -12,7 +12,7 @@ A library for seamless in-page cold updates using iframes.
 
 ## Introduction
 
-In long running web apps, such as chat clients or music players, users leave pages open for weeks. It's desirable to be able to push new code updates to them, but in-page updates must be extremely fast and reliable to not become disruptive to the user experience.
+In long running web apps, such as chat clients or music players, users leave pages open for weeks. It's useful to push code updates to existing clients, but in-page updates must be extremely fast and reliable to not become disruptive to the user experience.
 
 With Isolated Core, your client-side JS (the "core") is contained within an `<iframe>`. To render UI, the iframe reaches up to manipulate the DOM of its parent document. This pattern decouples app execution from the visible UI, making it possible to seamlessly reload the entire app separately from the page without navigation or jank. This has some cool advantages:
 
@@ -20,7 +20,7 @@ With Isolated Core, your client-side JS (the "core") is contained within an `<if
  * Fault-tolerance: network and JS errors during init are caught before performing an update.
  * Predictabilty: loading an update runs the same code paths as reloading the page.
 
-Isolated Core is complementary to existing techniques like [Hot Module Replacement (HMR)](https://webpack.github.io/docs/hot-module-replacement-with-webpack.html) and is framework agnostic. Unlike HMR, Isolated Core reloads your entire app environment \*cold\*, from a blank slate. This makes updates predictable and easy to reason about, and facilitates updating components that previously required a full page reload. In addition, Isolated Core makes rollouts safer: since updates load and initialize in the background, failures can be caught rapidly and without disrupting the user.
+Isolated Core is complementary to existing techniques like [Hot Module Replacement (HMR)](https://webpack.github.io/docs/hot-module-replacement-with-webpack.html) and is framework agnostic. Unlike HMR, Isolated Core reloads your entire app environment \*cold\* from a blank slate. This makes updates predictable and easy to reason about, and facilitates updating components that previously required a full page reload. In addition, Isolated Core makes rollouts safer: since updates load and initialize in the background, failures can be caught rapidly without disrupting the user.
 
 
 ## Browser Compatibility
@@ -28,11 +28,6 @@ Isolated Core is complementary to existing techniques like [Hot Module Replaceme
 Isolated core works on IE9+ and all other modern browsers. IE8 support is possible but not complete -- if you need it, please file an issue!
 
 [![Sauce Test Status](https://saucelabs.com/browser-matrix/isolated-core.svg)](https://saucelabs.com/u/isolated-core)
-
-
-## Example
-
-You can find a demo codebase demonstrating reloading using Isolated Core in the [demo](https://github.com/chromakode/isolated-core/tree/master/demo) directory of this repo. You can also [view the demo in your browser](http://chromakode.github.io/isolated-core/).
 
 
 ## Usage
@@ -103,7 +98,7 @@ loadCore({
 )
 ```
 
-Finally, you should use CSS to hide core iframes. The easiest way to do it is to match the `data-coreid` attribute:
+You should use CSS to hide core iframes. The easiest way to do it is to match the `data-coreid` attribute:
 
 ```css
 iframe[data-coreid] { display: none }
@@ -125,7 +120,7 @@ While in general the Isolated Core pattern provides a lot of benefits, there are
 
 ### `coreInit({ scriptURL, run, args })`
 
-Initialize the core, creating the first iframe if necessary.
+Initialize a core, creating an iframe on first page load if necessary.
 
 When called outside a core iframe, `coreInit` passes its options to `loadCore` and automatically attaches the first core when it's ready.
 
