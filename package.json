@@ -45,6 +45,7 @@
     "eslint": "~1.10.3",
     "eslint-config-airbnb": "~2.0.0",
     "eslint-plugin-react": "~3.11.3",
-    "babel-eslint": "~4.1.6"
+    "babel-eslint": "~4.1.6",
+    "escope": "~3.3.0"
   }
 }
