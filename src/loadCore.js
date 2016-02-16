@@ -29,8 +29,9 @@ export default function loadCore(opts, uidocument = window._core.uidocument) {
       onReady(handlers) {
         coreData.attach = handlers.attach
         coreData.detach = handlers.detach
+        coreData.setup = handlers.setup
         resolve({
-          launchCore: () => swapCore(window, envContext, uidocument),
+          launchCore: data => swapCore(window, envContext, uidocument, data),
           ...coreInfo(envContext),
         })
       },

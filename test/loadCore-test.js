@@ -72,13 +72,15 @@ describe('loadCore', () => {
       const coreData = coreRef.context._core
       expect(coreData.attach).toBe(handlers.attach)
       expect(coreData.detach).toBe(handlers.detach)
+      expect(coreData.setup).toBe(handlers.setup)
 
       checkCoreInfo(coreRef)
       expect(coreRef.launchCore).toBeA('function')
       const operations = require('../src/operations')
       const swapCoreSpy = spyOn(operations, 'swapCore')
-      coreRef.launchCore()
-      expect(swapCoreSpy).toHaveBeenCalledWith(window, coreRef.context, document)
+      const setupData = { hello: 'world' }
+      coreRef.launchCore(setupData)
+      expect(swapCoreSpy).toHaveBeenCalledWith(window, coreRef.context, document, setupData)
       swapCoreSpy.restore()
 
       coreRef.destroyCore()
@@ -95,6 +97,8 @@ describe('loadCore', () => {
         expect(coreEvent.calls[index].arguments[2]).toBe(thirdArgument)
       }
     }
+
+    const setupData = { hello: 'world' }
 
     let hoistedFirstEnvEl
     let hoistedSecondEnvEl
@@ -122,7 +126,7 @@ describe('loadCore', () => {
         expectCoreEvent(3, 'init', 1)
         expectCoreEvent(4, 'ready', 1)
 
-        firstCoreRef.context.launchNextCore()
+        firstCoreRef.context.launchNextCore(setupData)
       })
     })
 
@@ -134,9 +138,10 @@ describe('loadCore', () => {
         return
       }
 
-      expectCoreEvent(5, 'detach', 0, document)
-      expectCoreEvent(6, 'attach', 1, document)
-      expect(coreEvent.calls.length).toBe(7)
+      expectCoreEvent(5, 'setup', 1, setupData)
+      expectCoreEvent(6, 'detach', 0, document)
+      expectCoreEvent(7, 'attach', 1, document)
+      expect(coreEvent.calls.length).toBe(8)
 
       expect(hoistedFirstEnvEl.getAttribute('data-core-active')).toBe(null)
       expect(hoistedFirstEnvEl.parentNode).toBe(null)
@@ -147,6 +152,8 @@ describe('loadCore', () => {
     }
     waitForSecondCore()
   })
+
+  it('launchCore method throws if core setup method throws an error')
 
   it('rejects if a script throws an exception with an errInfo object, and removes when destroyed', () => {
     return loadCore({

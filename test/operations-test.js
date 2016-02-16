@@ -71,6 +71,11 @@ describe('core operations', () => {
     })
   })
 
+  describe('setupCore', () => {
+    it('calls setup handler if a handler exists')
+    it('does not call setup handler if a handler does not exist')
+  })
+
   describe('swapCore', () => {
     it('detaches current context, attaches next context, and destroys current context', () => {
       const fakeDoc = {}

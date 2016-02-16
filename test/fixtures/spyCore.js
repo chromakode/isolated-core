@@ -14,14 +14,18 @@ coreInit({
       return loadCore({ scriptURL }).then(coreRef => nextCoreRef = coreRef)
     }
 
-    window.launchNextCore = function launchNextCore() {
-      nextCoreRef.launchCore()
+    window.launchNextCore = function launchNextCore(data) {
+      nextCoreRef.launchCore(data)
       // When we call launchCore, the current iframe is removed from the DOM.
       // Subsequent statements should not be executed.
       window.top.coreEvent('xxx', core)
     }
 
     const handlers = {
+      setup(data) {
+        window.top.coreEvent('setup', core, data)
+      },
+
       attach(uidocument) {
         window.top.coreEvent('attach', core, uidocument)
       },

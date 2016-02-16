@@ -16,7 +16,14 @@ export function attachCore(nextContext, uidocument) {
   nextContext._core.attach(uidocument)
 }
 
-export function swapCore(context, nextContext, uidocument) {
+export function setupCore(context, data) {
+  if (context._core.setup) {
+    context._core.setup(data)
+  }
+}
+
+export function swapCore(context, nextContext, uidocument, data) {
+  setupCore(nextContext, data)
   detachCore(context, uidocument)
   attachCore(nextContext, uidocument)
   destroyCore(context)
