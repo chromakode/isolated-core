@@ -18,7 +18,7 @@ With Isolated Core, your client-side JS (the "core") is contained within an `<if
 
  * Speed: updates load in the background and "swapping cores" is extremely fast.
  * Fault-tolerance: network and JS errors during init are caught before performing an update.
- * Predictabilty: loading an update runs the same code paths as reloading the page.
+ * Predictability: loading an update runs the same code paths as reloading the page.
 
 Isolated Core is complementary to existing techniques like [Hot Module Replacement (HMR)](https://webpack.github.io/docs/hot-module-replacement-with-webpack.html) and is framework agnostic. Unlike HMR, Isolated Core reloads your entire app environment \*cold\* from a blank slate. This makes updates predictable and easy to reason about, and facilitates updating components that previously required a full page reload. In addition, Isolated Core makes rollouts safer: since updates load and initialize in the background, failures can be caught rapidly without disrupting the user.
 
